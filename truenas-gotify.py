@@ -11,6 +11,9 @@ GOTIFY_BASEURL = os.environ.get("GOTIFY_URL")
 # Example: cGVla2Fib29v
 GOTIFY_TOKEN = os.environ.get("GOTIFY_TOKEN")
 
+LISTEN_HOST = "127.0.0.1"
+PORT = 31662
+
 
 routes = web.RouteTableDef()
 
@@ -65,4 +68,4 @@ if __name__ == "__main__":
     # Listen on default port
     app = web.Application()
     app.add_routes(routes)
-    web.run_app(app)
+    web.run_app(app, host=LISTEN_HOST, port=PORT)
