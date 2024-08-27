@@ -11,7 +11,7 @@ GOTIFY_BASEURL = os.environ.get("GOTIFY_URL")
 # Example: cGVla2Fib29v
 GOTIFY_TOKEN = os.environ.get("GOTIFY_TOKEN")
 
-LISTEN_HOST = "127.0.0.1"
+LISTEN_HOST = "0.0.0.0"
 PORT = 31662
 
 
