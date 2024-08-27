@@ -1,0 +1,10 @@
+services:
+  truenas-gotify-adapter:
+    image: ghcr.io/ztube/truenas-gotify-adapter:main
+    container_name: truenas-gotify-adapter
+    restart: unless-stopped
+    environment:
+      GOTIFY_URL: https://push.example.com
+      GOTIFY_TOKEN: gotify_token
+    ports:
+      - 31662:31662
