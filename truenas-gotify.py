@@ -11,7 +11,8 @@ GOTIFY_BASEURL = os.environ.get("GOTIFY_URL")
 # Example: cGVla2Fib29v
 GOTIFY_TOKEN = os.environ.get("GOTIFY_TOKEN")
 
-LISTEN_HOST = "127.0.0.1"
+# The ip address the service should listen on
+LISTEN_HOST = os.environ.get("LISTEN_HOST", "127.0.0.1")
 PORT = 31662
 
 
