@@ -17,8 +17,16 @@ Note that Slack is not required at all for this integration to work.
     - Check _"Provide access to node network namespace for the workload"_
     - Save
 
-1. System Settings -> Alert Settings -> Add
+2. System Settings -> Alert Settings -> Add
     - _Type_: Slack
     - _Webhook URL_: http://localhost:31662
     - Click _Send Test Alert_ to test the connection
+![Screenshot 2024-09-30 222201](https://github.com/user-attachments/assets/24a1f65c-c483-4ca1-a9de-030d40c17a67)
     - Save
+  
+3. Gotify service
+    - Example of the test alert:
+
+![Screenshot 2024-09-30 222214](https://github.com/user-attachments/assets/50a22d26-a75d-4ccb-afbc-f806460ec358)
+
+
