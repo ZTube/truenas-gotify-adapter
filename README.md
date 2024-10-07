@@ -24,7 +24,7 @@ Note that Slack is not required at all for this integration to work.
       
     - Save
 
-2. System Settings -> Alert Settings -> Add
+2. System Settings -> Alert Settings -> Add (example below already have 1 gofity alert for Info level)
     ![Screenshot 2024-09-30 222015](https://github.com/user-attachments/assets/9fb1a5e8-5e8e-440e-abed-fe3fb544ab53)
 
     - _Type_: Slack
