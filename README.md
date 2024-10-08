@@ -15,7 +15,7 @@ Note that Slack is not required at all for this integration to work.
         - _Name_: GOTIFY_URL
         - _Value_: [your gotify url] e.g.https://gotify.example.com/ or service IP
         - _Name_: GOTIFY_TOKEN
-        - _Value_: [your gotify app token] e.g. cGVla2Fib29v
+        - _Value_: [your gotify app token] e.g. AEF1BGXrJOF56W2
         
     ![Screenshot 2024-09-30 221846](https://github.com/user-attachments/assets/448c9b3c-d02c-441c-950a-480e2cc6ee09)
 
