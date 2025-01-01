@@ -25,13 +25,16 @@ routes = web.RouteTableDef()
 async def on_message(request):
     content = await request.json()
     # The content of the alert message
-    message = content["text"].strip()
-    print("=========== NOTIFICATION ===========")
+    message = content["text"].strip().partition("\n")
+    # Extract notification title from the message
+    title = message[0].strip()
+    message = message[2].strip()
+    print(f"========== {title} ==========")
     print(message)
-    print("========= NOTIFICATION END =========")
+    print(f"{len(title) * '='}======================")
 
     # Forward the alert to gotify
-    gotify_resp = await send_gotify_message(message, GOTIFY_TOKEN)
+    gotify_resp = await send_gotify_message(message, GOTIFY_TOKEN, title=title)
 
     # Check for http reponse status code 'success'
     if gotify_resp.status == 200:
