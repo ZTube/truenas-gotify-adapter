@@ -18,6 +18,21 @@ Note that Slack is not required at all for this integration to work.
         - Check _"Host Network"_
     - Save
 
+OR
+
+1. Apps -> Discover Apps -> Custom App -> Install via YAML
+```yaml
+services:
+  gotify-truenas-adapter:
+    container_name: gotify-truenas-adapter
+    image: ghcr.io/ztube/truenas-gotify-adapter:main
+    restart: unless-stopped
+    environment:
+      - GOTIFY_URL=<your gotify url> # e.g. https://gotify.example.com/
+      - GOTIFY_TOKEN=<your gotify app token> # e.g. cGVla2Fib29v
+    network_mode: host
+```
+
 1. System -> Alert Settings -> Add
     - _Type_: Slack
     - _Webhook URL_: http://localhost:31662
