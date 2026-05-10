@@ -74,6 +74,11 @@ async def send_gotify_message(message, token, title=None, priority=None):
         async with session.post(GOTIFY_BASEURL, headers=headers, json=json, ssl=VERIFY_CERT) as resp:
             return resp
 
+# Listen to get requests on /health
+@routes.get("/health")
+async def handle(request):
+    return web.Response(status=200)
+
 if __name__ == "__main__":
     # Check if env variables are set
     if GOTIFY_BASEURL == None:
