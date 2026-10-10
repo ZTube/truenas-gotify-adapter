@@ -27,8 +27,8 @@ PORT = 31662
 VERIFY_CERT = not os.environ.get("VERIFY_CERT", "true").lower() in ("false", "no", "n")
 
 
-
 routes = web.RouteTableDef()
+
 
 # Listen to post requests on / and /message
 @routes.post("/")
@@ -45,7 +45,7 @@ async def on_message(request):
     print(f"{len(title) * '='}======================")
 
     # Forward the alert to gotify
-    gotify_resp = await send_gotify_message(message, GOTIFY_TOKEN, title=title)
+    gotify_resp = await send_gotify_message(message, title=title)
 
     # Check for http reponse status code 'success'
     if gotify_resp.status == 200:
@@ -58,13 +58,13 @@ async def on_message(request):
     # Return the gotify status code to truenas
     return web.Response(status=gotify_resp.status)
 
+
 # Send an arbitrary alert to gotify
-async def send_gotify_message(message, token, title=None, priority=None):
+async def send_gotify_message(message, title=None, priority=None):
     # Set token through header
-    headers = {"X-Gotify-Key": token}
+    headers = {"X-Gotify-Key": GOTIFY_TOKEN}
     # POST body
     json = {"message": message}
-
     # Optional gotify features
     if title:
         json["title"] = title
@@ -74,6 +74,7 @@ async def send_gotify_message(message, token, title=None, priority=None):
     async with ClientSession() as session:
         async with session.post(f"{GOTIFY_URL}/message", headers=headers, json=json, ssl=VERIFY_CERT) as resp:
             return resp
+
 
 # Listen to get requests on /health
 @routes.get("/health")
