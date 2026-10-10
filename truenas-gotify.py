@@ -5,8 +5,9 @@ from aiohttp import web
 from aiohttp import ClientSession
 
 # The url the alerts should be forwarded to.
-# Format: http[s]://{host}:{port}/
-GOTIFY_BASEURL = os.environ.get("GOTIFY_URL")
+# Format: http[s]://{host}:{port}
+GOTIFY_URL = os.environ.get("GOTIFY_URL")
+
 # The token for the gotify application
 # Example: cGVla2Fib29v
 GOTIFY_TOKEN = os.environ.get("GOTIFY_TOKEN")
@@ -71,7 +72,7 @@ async def send_gotify_message(message, token, title=None, priority=None):
         json["priority"] = priority
 
     async with ClientSession() as session:
-        async with session.post(GOTIFY_BASEURL, headers=headers, json=json, ssl=VERIFY_CERT) as resp:
+        async with session.post(f"{GOTIFY_URL}/message", headers=headers, json=json, ssl=VERIFY_CERT) as resp:
             return resp
 
 # Listen to get requests on /health
@@ -81,16 +82,14 @@ async def handle(request):
 
 if __name__ == "__main__":
     # Check if env variables are set
-    if GOTIFY_BASEURL == None:
-        sys.exit("Set Gotify Endpoint via 'GOTIFY_URL=http[s]://{host}:{port}/'!")
+    if GOTIFY_URL == None:
+        sys.exit("Set Gotify Endpoint via 'GOTIFY_URL=http[s]://{host}:{port}'!")
     if GOTIFY_TOKEN == None:
         sys.exit("Set Gotify App Token via 'GOTIFY_TOKEN={token}'!")
 
-    # Add /message to the url
-    if not "message" in GOTIFY_BASEURL:
-        if not GOTIFY_BASEURL[-1] == "/":
-            GOTIFY_BASEURL += "/"
-        GOTIFY_BASEURL += "message"
+    # Remove trailing slash to the url if present
+    if GOTIFY_URL[-1] == "/":
+        GOTIFY_URL = GOTIFY_URL[:-1]
 
     if not VERIFY_CERT:
         print("WARNING: Running without certificate validation of the gotify endpoint")
