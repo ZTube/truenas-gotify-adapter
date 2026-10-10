@@ -78,7 +78,13 @@ async def send_gotify_message(message, token, title=None, priority=None):
 # Listen to get requests on /health
 @routes.get("/health")
 async def handle(request):
-    return web.Response(status=200)
+    async with ClientSession() as session:
+        async with session.get(f"{GOTIFY_URL}/health", ssl=VERIFY_CERT) as resp:
+            json = await resp.json()
+            if resp.status == 200 and json["health"] == 'green':
+                return web.Response(status=200)
+            else:
+                return web.Response(status=500)
 
 if __name__ == "__main__":
     # Check if env variables are set
